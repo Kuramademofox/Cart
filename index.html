@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Shopping Cart</title>
     <style>
         body {
-            font-family: quicksand, sans-serif;
+            font-family: 'Quicksand', sans-serif;
             background-color: #f8f8f8;
             margin: 0;
             padding: 0;
@@ -33,6 +34,7 @@
             flex: 1;
             margin: 0 20px;
         }
+        
         .search-bar {
             display: flex;
             align-items: center;
@@ -73,10 +75,10 @@
             cursor: pointer;
         }
         .background {
-            background-image: url('images/support\ bg.png'); /* Replace with your background image path */
+            background-image: url('images/support\ bg.png'); /* Corrected background image path */
             background-size: cover;
             background-position: center;
-            padding: 20px 0; /* Adjust the padding as needed */
+            padding: 80px 0;
             text-align: center;
             color: #333;
         }
@@ -92,35 +94,98 @@
             font-weight: bold;
             margin: 10px 0;
         }
-        .title {
-            font-size: 36px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
         
-        .cart-table {
-            width: 80%;
-            margin: 20px auto;
+        
+        .cart-container {
+            width: 50%;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .table-box {
+            padding: 20px;
+            border: 1px solid #ddd;
+            
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .table-box table {
+            width: 100%;
             border-collapse: collapse;
-            background-color: #ffffff;
         }
-        .cart-table th, .cart-table td {
-            padding: 15px;
-            text-align: center;
-            border: none; /* Remove borders */
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the table */
         }
-        .cart-table th {
-            background-color: #f2f2f2;
+
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
         }
-        .quantity-input {
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: normal;
+            font-size: 14px;
+            color: #555;
+        }
+
+        td {
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        td img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .quantity {
             display: flex;
-            justify-content: center;
             align-items: center;
         }
-        .quantity-input input {
+
+        .quantity button {
+            background-color: #e0e0e0;
+            border: none;
+            padding: 6px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+
+        .quantity input {
             width: 40px;
             text-align: center;
+            border: none;
+            font-size: 14px;
+            background: transparent;
+            outline: none;
         }
+
+        .total {
+            font-weight: bold;
+        }
+
+        .action {
+            color: #d9534f;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .action:hover {
+            color: #c9302c;
+        }
+
         .btn {
             background-color: #3BB77E;
             color: white;
@@ -131,28 +196,37 @@
             text-decoration: none;
             margin: 5px;
         }
+
         .btn:hover {
             background-color: #45a049;
         }
+
         .btn-clear {
             background-color: red;
         }
+
         .btn-update {
             background-color: #ddd;
             color: black;
         }
+
         .btn-proceed {
             background-color: #3BB77E;
         }
+
         .btn-clear:hover, .btn-update:hover, .btn-proceed:hover {
             opacity: 0.9;
         }
-        button {
-            margin-top: 20px;
-            text-align: center;
+
+        .buttons {
+            display: flex;
+            justify-content: center; /* Center the buttons horizontally */
+            margin: 20px 0; /* Space around the buttons */
+             left: 30%;
+              transform: translateX(-20%)
         }
         .subscription {
-            background-image: url('images/Image.png');
+            background-image: url('images/newsletter\ background.png');
             background-size: cover;
             background-position: center;
             padding: 100px;
@@ -261,7 +335,6 @@
             text-decoration: underline;
         }
         .footer-bottom {
-
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -275,261 +348,252 @@
         .footer-bottom p {
             margin: 0;
         }
-        .social-links {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
 
-        .social-links a {
-            display: inline-block;
-            margin-left: 10px;
-            color: #3BB77E;
-            text-decoration: none;
-            font-size: 25px; /* Increase the font size */
-        }
-
-        .social-links a:hover {
-            color: #339966;
-        }
+      
 
         /* Responsive Styles */
-        @media (max-width: 1024px) {
-            .faq-item button {
-                font-size: 16px;
-            }
-        }
-        @media (max-width: 768px) {
-            .content {
+        @media (max-width: 497px) {
+            .search-bar-container {
                 flex-direction: column;
-            }
-            .faq, .contact-form {
-                flex: 1 1 100%;
-            }
-            .contact-form label {
-                font-size: 14px;
-            }
-            .contact-form button {
-                font-size: 16px;
-            }
-            .subscription {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .subscription h2, .subscription form {
-                flex: 1 1 100%;
-            }
-            .subscription form {
-                justify-content: center;
-                width: 100%;
-            }
-            .subscription input, .subscription button {
-                width: 100%;
-                max-width: none;
-            }
-        }
-        @media (max-width: 480px) {
-            .faq-item button {
-                font-size: 14px;
-                padding: 8px;
-            }
-            .contact-form input, .contact-form textarea {
-                font-size: 14px;
-            }
-            .contact-form button {
-                font-size: 16px;
-                padding: 8px;
-            }
-            .subscription input, .subscription button {
-                font-size: 14px;
-                padding: 8px;
-            }
-            .payment-icons {
-                display: flex;
-                justify-content: center;
-                flex-grow: 1;
+                align-items: flex-start;
             }
 
+            .search-bar input {
+                margin-top: 10px;
+                margin-right: 0;
+            }
+
+            .footer-top {
+                flex-direction: column;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
         }
+
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: column;
+            }
+
+            .icons {
+                margin-top: 10px;
+            }
+
+            .subscription {
+                flex-direction: column;
+                padding: 20px;
+                border-radius: 0;
+            }
+
+            .subscription h2 {
+                margin-bottom: 20px;
+            }
+
+            .feature-container {
+                flex-direction: column;
+            }
+
+            .feature {
+                margin-bottom: 20px;
+            }
+            .social-links {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+
+            .social-links a {
+                display: inline-block;
+                margin-left: 10px;
+                color: #3BB77E; 
+                text-decoration: none;
+                font-size: 70px; 
+            }
+
+            .social-links a:hover {
+                color: #2F9D68; 
+            }
+
+
+        }
+
     </style>
 </head>
 <body>
     <div class="header">
         <div class="logo">
-            <img src="images/logo.png" alt="Grocery Mart Logo"> <!-- Replace with actual logo URL -->
-
-          <a href="index.html">Drop It</a>
+            <img src="images/logo.png" alt="Logo">
+            <span>Drop It</span>
+         
         </div>
         <div class="search-bar-container">
             <div class="search-bar">
                 <select>
                     <option>All Categories</option>
-                    <!-- Add more categories here -->
+                    <option>Vegetables</option>
+                    <option>Fruits</option>
+                    <option>Dairy</option>
                 </select>
-                <input type="text" placeholder="Search for items...">
+                <input type="text" placeholder="Search for products...">
             </div>
             <div class="search-icon">
-                <img src="images/Search-btn.png" alt="Search Icon"> <!-- Replace with actual search icon URL -->
+                <img src="images/Search-btn.png" alt="Search">
             </div>
         </div>
-          <div class="icons">
-            <a href="wishlist.html">
-                <img src="images/Wishlist-1.png" alt="Wishlist Icon"> <!-- Replace with actual wishlist icon URL -->
-            </a>
-            <a href="cart.html">
-                <img src="images/Cart-1.png" alt="Cart Icon"> <!-- Replace with actual cart icon URL -->
-            </a>
-            <a href="profile.html" class="profile-icon">
-                <img src="images/Profile.png" alt="Profile Icon"> <!-- Replace with actual profile icon URL -->
-            </a>
-          </div>   
-
+        
+        
+        <div class="icons">
+            <img src="images/Cart-1.png" alt="Cart">
+            <div class="profile-icon">
+                <img src="images/Profile.png" alt="Profile">
+            </div>
         </div>
     </div>
-    <div class="background">
-        <div class="breadcrumbs">Home / Cart</div>
-        <div class="title">Cart</div>
-    </div>
     
-    <table class="cart-table">
+    <div class="background">
+        <h1 class="breadcrumbs">Home > Shopping Cart</h1>
+        <h2 class="title">Shopping Cart</h2>
+    </div>
+
+    <table>
         <thead>
             <tr>
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><img src="images/tomato.png" alt="Tomato Local" style="width:50px;"> Tomato Local</td>
-                <td>₹ 64</td>
                 <td>
-                    <div class="quantity-input">
+                    <img src="images/apple.webp" alt="Product 1">
+                    apple
+                </td>
+                <td> ₹.10.00</td>
+                <td>
+                    <div class="quantity">
                         <button>-</button>
-                        <input type="text" value="0">
+                        <input type="text" value="1">
                         <button>+</button>
                     </div>
                 </td>
-                <td>₹ 64</td>
+                <td class="total"> ₹.10.00</td>
+                <td><span class="action">Remove</span></td>
             </tr>
             <tr>
-                <td><img src="images/tomato.png" alt="Tomato Local" style="width:50px;"> Tomato Local</td>
-                <td>₹ 64</td>
                 <td>
-                    <div class="quantity-input">
+                    <img src="images/apple.webp" alt="Product 1">
+                    apple
+                </td>
+                <td> ₹.10.00</td>
+                <td>
+                    <div class="quantity">
                         <button>-</button>
-                        <input type="text" value="0">
+                        <input type="text" value="1">
                         <button>+</button>
                     </div>
                 </td>
-                <td>₹ 64</td>
+                <td class="total"> ₹.10.00</td>
+                <td><span class="action">Remove</span></td>
             </tr>
-            <tr>
-                <td><img src="images/tomato.png" alt="Tomato Local" style="width:50px;"> Tomato Local</td>
-                <td>₹ 64</td>
-                <td>
-                    <div class="quantity-input">
-                        <button>-</button>
-                        <input type="text" value="0">
-                        <button>+</button>
-                    </div>
-                </td>
-                <td>₹ 64</td>
-            </tr>
+            <!-- Repeat rows as necessary -->
         </tbody>
     </table>
+    
     <div class="buttons">
-        <a href="#" class="btn btn-clear">Clear Cart</a>
-        <a href="#" class="btn btn-update">Update Cart</a>
-        <a href="#" class="btn btn-proceed">Proceed to Checkout</a>
+        <button class="btn btn-clear">Clear Cart</button>
+        <button class="btn btn-update">Update Cart</button>
+        <button class="btn btn-proceed">Proceed to Checkout</button>
     </div>
-    <div class="subscription">
-        <h2>Subscribe to our Newsletter</h2>
-        <form action="#" method="post">
-            <input type="email" name="email" placeholder="Your Email Address" required>
-            <button type="submit">Subscribe</button>
-        </form>
-    </div>
-    <div class="feature-container">
-        <div class="feature">
-            <img src="images/Best Prices & Deals.png" alt="Deals">
-            <div>
-                <h3>Best Prices & Deals</h3>
-                <p>Don't miss our daily amazing deals and prices</p>
-            </div>
-        </div>
-        <div class="feature">
-            <img src="images/Refundable.png" alt="Refund">
-            <div>
-                <h3>Refundable</h3>
-                <p>If your items have damage we agree to refund it</p>
-            </div>
-        </div>
-        <div class="feature">
-            <img src="images/Free delivery.png" alt="Free Delivery">
-            <div>
-                <h3>Free Delivery</h3>
-                <p>Do purchase over $50 and get free delivery anywhere</p>
-            </div>
-        </div>
-    </div>
-    </div>
-    <footer>
-    <div class="footer-top">
-        <div>
-            <h4>Drop It</h4>
-            <img src="images/logo.png" alt="Logo" style="width: 30px; height: 30px;">
-            <ul>
-                <li><a href="#">Company Information</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Store Locations</a></li>
-                <li><a href="#">Affiliate Program</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4>Customer Service</h4>
-            <ul>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Order Tracking</a></li>
-                <li><a href="#">Returns & Exchanges</a></li>
-                <li><a href="#">Shipping & Delivery</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="#">New Arrivals</a></li>
-                <li><a href="#">Best Sellers</a></li>
-                <li><a href="#">Special Offers</a></li>
-                <li><a href="#">Gift Cards</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4>Help Center</h4>
-            <ul>
-                <li><a href="#">Payments</a></li>
-                <li><a href="#">Refund</a></li>
-                <li><a href="#">Checkout</a></li>
-                <li><a href="#">Q&A</a></li>
-                <li><a href="#">Privacy Policy</a></li>                
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div style="display: flex; align-items: center;">
-            <p>&copy; 2024 Grocery Mart. All rights reserved. | <a href="#">Privacy Policy</a></p>
 
+    <div class="subscription">
+          <h2>Subscribe to our Newsletter</h2>
+          <form action="#" method="post">
+              <input type="email" name="email" placeholder="Your Email Address" required>
+              <button type="submit">Subscribe</button>
+          </form>
         </div>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <div class="feature-container">
+          <div class="feature">
+              <img src="images/best prices.png" alt="Deals">
+              <div>
+                  <h3>Best Prices & Deals</h3>
+                  <p>Don't miss our daily amazing deals and prices</p>
+              </div>
+          </div>
+          <div class="feature">
+              <img src="images/Refundable.png" alt="Refund">
+              <div>
+                  <h3>Refundable</h3>
+                  <p>If your items have damage we agree to refund it</p>
+              </div>
+          </div>
+          <div class="feature">
+              <img src="images/Free delivery.png" alt="Free Delivery">
+              <div>
+                  <h3>Free Delivery</h3>
+                  <p>Do purchase over $50 and get free delivery anywhere</p>
+              </div>
+          </div>
         </div>
-    </div>
-    </footer>
-   
+        </div>
+        <footer>
+        <div class="footer-top">
+          <div>
+              <h4>Drop It</h4>
+              <img src="images/logo.png" alt="Logo" style="width: 30px; height: 30px;">
+              <ul>
+                  <li><a href="#">Company Information</a></li>
+                  <li><a href="#">Careers</a></li>
+                  <li><a href="#">Store Locations</a></li>
+                  <li><a href="#">Affiliate Program</a></li>
+              </ul>
+          </div>
+          <div>
+              <h4>Customer Service</h4>
+              <ul>
+                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="#">Order Tracking</a></li>
+                  <li><a href="#">Returns & Exchanges</a></li>
+                  <li><a href="#">Shipping & Delivery</a></li>
+              </ul>
+          </div>
+          <div>
+              <h4>Quick Links</h4>
+              <ul>
+                  <li><a href="#">New Arrivals</a></li>
+                  <li><a href="#">Best Sellers</a></li>
+                  <li><a href="#">Special Offers</a></li>
+                  <li><a href="#">Gift Cards</a></li>
+              </ul>
+          </div>
+          <div>
+              <h4>Help Center</h4>
+              <ul>
+                  <li><a href="#">Payments</a></li>
+                  <li><a href="#">Refund</a></li>
+                  <li><a href="#">Checkout</a></li>
+                  <li><a href="#">Q&A</a></li>
+                  <li><a href="#">Privacy Policy</a></li>                
+              </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div style="display: flex; align-items: center;">
+              <p>&copy; 2024 Grocery Mart. All rights reserved. | <a href="#">Privacy Policy</a></p>
+
+          </div>
+          <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        </footer>
 </body>
 </html>
